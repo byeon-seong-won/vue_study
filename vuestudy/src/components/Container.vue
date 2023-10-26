@@ -7,7 +7,7 @@
         
         <!-- 필터선택페이지 -->
         <div v-if="step == 1">
-            <div class="upload-image"></div>
+            <div class="upload-image" :style="{ backgroundImage : `url(${img})`}"></div>
             <div class="filters">
               <div class="filter-1"></div>
               <div class="filter-1"></div>
@@ -19,9 +19,11 @@
 
         <!-- 글작성페이지 -->
         <div v-if="step == 2">
-            <div class="upload-image"></div>
+            <div class="upload-image" :style="{ backgroundImage : `url(${img})`}"></div>
             <div class="write">
-              <textarea class="write-box">write!</textarea>
+              <textarea class="write-box" @input="$emit('input', $event.target.value)">
+                
+              </textarea>
             </div>
         </div>
 
@@ -33,19 +35,20 @@
 import Post from './Post.vue'
 
 export default {
+    
   components : {
     Post
   },
   props : {
     post :  Array,
-    step : Number
+    step : Number,
+    img : String,
   }
 }
   </script>
 
 
 <style>
-.container {border: 5px solid red;}
 .upload-image{
 width: 100%;
 height: 450px;
