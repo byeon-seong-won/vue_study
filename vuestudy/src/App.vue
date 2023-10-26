@@ -10,17 +10,27 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :post="게시물"/>
+  <button @click="step=0">버튼0</button>
+  <button @click="step=1">버튼1</button>
+  <button @click="step=2">버튼2</button>
+
+  <Container :post="게시물" :step="step"/>
   <button @click="more()">더보기</button>
 
   
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload()" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
- </div>
+  </div>
+
+
+  <div style="margin-top: 500px;"></div>
+
+
 </template>
+
 
 <script>
 import postdata from './assets/data.js'
@@ -28,13 +38,13 @@ import Container from './components/Container.vue'
 import axios from 'axios';
 
 
-
-
 export default {
   name : 'App',
   data() {
     return {
-      게시물 : postdata
+      게시물 : postdata,
+      더보기클릭 : 0,
+      step : 0
     }
   },
   components : {
@@ -42,13 +52,19 @@ export default {
   },
   methods : {
     more() {
-      axios.get('https://codingapple1.github.io/vue/more0.json').then((결과) => {
+      axios.get(`https://codingapple1.github.io/vue/more${this.더보기클릭}.json`).then((결과) => {
         this.게시물.push(결과.data)
+        this.더보기클릭++
       })
+    },
+    upload(e) {
+      let 파일 = e.target.files;
+      let url = URL.createObjectURL(파일[0]);
+      console.log(url);
+      this.step++
     }
   }
 }
-
 </script>
 
 
