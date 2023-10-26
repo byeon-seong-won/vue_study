@@ -7,6 +7,7 @@
     <ul class="header-button-right">
       <li>Next</li>
     </ul>
+    <button v-if="step==2" @click="publish()">발행하기</button>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
@@ -14,13 +15,13 @@
   <button @click="step=1">버튼1</button>
   <button @click="step=2">버튼2</button>
 
-  <Container :post="게시물" :step="step"/>
+  <Container :post="게시물" :step="step" :img="img" @input="inputCont = $event;"/>
   <button @click="more()">더보기</button>
 
   
   <div class="footer">
     <ul class="footer-button-plus">
-      <input @change="upload()" type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -44,7 +45,10 @@ export default {
     return {
       게시물 : postdata,
       더보기클릭 : 0,
-      step : 0
+      step : 0,
+      img : '',
+      inputCont : '',
+      inputimg : ''
     }
   },
   components : {
@@ -54,14 +58,29 @@ export default {
     more() {
       axios.get(`https://codingapple1.github.io/vue/more${this.더보기클릭}.json`).then((결과) => {
         this.게시물.push(결과.data)
-        this.더보기클릭++
+        // this.더보기클릭++
       })
     },
-    upload(e) {
+    upload(e){
       let 파일 = e.target.files;
       let url = URL.createObjectURL(파일[0]);
       console.log(url);
       this.step++
+      this.img = url
+    },
+    publish() {
+        var 새게시물 = {
+            name: "Seong won",
+            userImage: "https://picsum.photos/100?random=3",
+            postImage: "https://picsum.photos/600?random=3",
+            likes: 500,
+            date: "Oct 30",
+            liked: false,
+            content: this.inputCont,
+            filter: "perpetua"
+        };
+        this.게시물.unshift(새게시물);
+        this.step = 0;
     }
   }
 }
