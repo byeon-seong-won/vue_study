@@ -1,105 +1,134 @@
 
 <template>
-  <div class="wrap">
+  <div class="header">
+    <ul class="header-button-left">
+      <li>Cancel</li>
+    </ul>
+    <ul class="header-button-right">
+      <li>Next</li>
+    </ul>
+    <img src="./assets/logo.png" class="logo" />
+  </div>
 
-    <!-- menu -->
-    <Menu/>
-
-    <!-- main -->
-    <router-view :lists="lists"></router-view>    
-    <!-- <Detail :detail="lists"></Detail> -->
+  <Container :post="게시물"/>
+  <button @click="more()">더보기</button>
 
   
-  </div>
+  <div class="footer">
+    <ul class="footer-button-plus">
+      <input type="file" id="file" class="inputfile" />
+      <label for="file" class="input-plus">+</label>
+    </ul>
+ </div>
 </template>
 
 <script>
-import data from './assets/data.js'
-import Menu from './components/Menucomp.vue'
+import postdata from './assets/data.js'
+import Container from './components/Container.vue'
+import axios from 'axios';
+
+
+
 
 export default {
   name : 'App',
-  data(){
+  data() {
     return {
-      신고수 : [0,1,2,3,4,5],
-      idx : 0,
-      modal : false,
-      lists : data,
-      오브젝트 : { name : "byeon", age : 29 }
+      게시물 : postdata
     }
   },
   components : {
-    Menu
+    Container
   },
   methods : {
-    priceSort() {
-      this.원룸들.sort(function(a,b) {
-        return a.price - b.price
+    more() {
+      axios.get('https://codingapple1.github.io/vue/more0.json').then((결과) => {
+        this.게시물.push(결과.data)
       })
-    },
-    sortBack() {
-      this.원룸들 = [...this.원룸들복제본]
     }
   }
 }
+
 </script>
 
+
+
 <style>
-/* common style */
-*{ margin: 0;padding: 0;font-family: 'roboto','Noto Sans KR', sans-serif; letter-spacing: -0.03em}
-html, body {width: 100%;height: 100%;position: relative;}
-html {overflow-y: scroll; overflow-x: hidden; } 
-article,aside,details,summary,figcaption,figure,
-footer,header,hgroup,main,nav,section {display: block;}
-li {list-style-type: none;} 
-a {text-decoration: none;color: inherit;} 
-table {border-collapse: collapse;}
-input, select {vertical-align: middle;}
-button,
-input[type=button],
-input[type=submit],
-input[type=reset] {cursor: pointer;}
-button,input {outline: none;}
-h1,h2,h3,h4,h5,h6 {font-size:100%; font-weight: normal; margin-top: 0; }
-img {vertical-align:top;font-size:0;border:0;}
-/* /// common style /// */
-
-
-
-.wrap {
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  /* background-image: url("./assets/main.png");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; */
+body {
+  margin: 0;
 }
-
-
-
-
-
-#app {-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
-
-body {margin : 0;}
-div {box-sizing: border-box;}
-.black-bg {width: 100%; height:100%;background: rgba(0,0,0,0.5);position: fixed; padding: 20px;}
-.white-bg {width: 100%; background: white;border-radius: 8px;padding: 20px;} 
-.room-img {width: 100%;}
-.product {background-color: #eee;margin-bottom: 40px;padding-bottom: 20px;}
-button {background: crimson;color: #fff;border: none;padding: 10px;border-radius: 10px;cursor: pointer;margin-right: 10px;}
-.start {opacity: 0;transition: all 1s;}
-.end {opacity: 1;}
-
-
-/* Transiton */
-.fade-enter-from {opacity: 0;}
-.fade-enter-active {transition: all 1s;}
-.fade-enter-to {opacity: 1;}
-
-
-
-
+ul {
+  padding: 5px;
+  list-style-type: none;
+}
+.logo {
+  width: 22px;
+  margin: auto;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 13px;
+}
+.header {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  padding-bottom: 8px;
+  position: sticky;
+  top: 0;
+}
+.header-button-left {
+  color: skyblue;
+  float: left;
+  width: 50px;
+  padding-left: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.header-button-right {
+  color: skyblue;
+  float: right;
+  width: 50px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.footer {
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  padding-bottom: 10px;
+  background-color: white;
+}
+.footer-button-plus {
+  width: 80px;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+  font-size: 24px;
+  padding-top: 12px;
+}
+.sample-box {
+  width: 100%;
+  height: 600px;
+  background-color: bisque;
+}
+.inputfile {
+  display: none;
+}
+.input-plus {
+  cursor: pointer;
+}
+#app {
+  box-sizing: border-box;
+  font-family: "consolas";
+  margin-top: 60px;
+  width: 100%;
+  max-width: 460px;
+  margin: auto;
+  position: relative;
+  border-right: 1px solid #eee;
+  border-left: 1px solid #eee;
+}
 
 </style>
