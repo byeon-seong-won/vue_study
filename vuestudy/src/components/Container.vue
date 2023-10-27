@@ -1,23 +1,22 @@
 
 <template>
     <div class="container">
+        <!-- tab01 -->
         <div v-if="step == 0">
             <Post :post="post[i]" v-for="(a,i) in post" :key="i"/>
         </div>
         
-        <!-- 필터선택페이지 -->
+        <!-- tab02 -->
         <div v-if="step == 1">
             <div class="upload-image" :style="{ backgroundImage : `url(${img})`}"></div>
             <div class="filters">
-              <div class="filter-1"></div>
-              <div class="filter-1"></div>
-              <div class="filter-1"></div>
-              <div class="filter-1"></div>
-              <div class="filter-1"></div>
+                <filterBox :img="img" :filter="filters[i]" v-for="(filter,i) in filters" :key="i">
+                  {{ filter }}  
+                </filterBox>
             </div>
         </div>
 
-        <!-- 글작성페이지 -->
+        <!-- tab03 -->
         <div v-if="step == 2">
             <div class="upload-image" :style="{ backgroundImage : `url(${img})`}"></div>
             <div class="write">
@@ -26,25 +25,32 @@
               </textarea>
             </div>
         </div>
-
     </div>
   </template>
   
  
   <script>
-import Post from './Post.vue'
+  import Post from './Post.vue'
+  import FilterBox from './filterBoxcomp.vue';
 
-export default {
-    
-  components : {
-    Post
-  },
-  props : {
-    post :  Array,
-    step : Number,
-    img : String,
+  export default {
+    data() {
+      return {
+        filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+        "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"]
+      }
+    },
+    components : {
+      Post,
+      FilterBox
+    },
+    props : {
+      post :  Array,
+      step : Number,
+      img : String,
+    }
   }
-}
   </script>
 
 
