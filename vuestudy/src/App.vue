@@ -48,7 +48,6 @@ export default {
       step : 0,
       img : '',
       inputCont : '',
-      inputimg : ''
     }
   },
   components : {
@@ -72,7 +71,7 @@ export default {
         var 새게시물 = {
             name: "Seong won",
             userImage: "https://picsum.photos/100?random=3",
-            postImage: "https://picsum.photos/600?random=3",
+            postImage: this.img,
             likes: 500,
             date: "Oct 30",
             liked: false,
