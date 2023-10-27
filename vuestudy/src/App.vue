@@ -48,7 +48,13 @@ export default {
       step : 0,
       img : '',
       inputCont : '',
+      선택한필터 : ''
     }
+  },
+  mounted() {
+    this.emitter.on('click', (a)=> {
+      this.선택한필터 = a
+    })
   },
   components : {
     Container
@@ -76,7 +82,7 @@ export default {
             date: "Oct 30",
             liked: false,
             content: this.inputCont,
-            filter: "perpetua"
+            filter: this.선택한필터
         };
         this.게시물.unshift(새게시물);
         this.step = 0;
