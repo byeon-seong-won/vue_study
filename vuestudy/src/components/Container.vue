@@ -21,7 +21,7 @@
         <div v-if="step == 2">
             <div class="upload-image" :style="{ backgroundImage : `url(${img})`}"></div>
             <div class="write">
-              <textarea class="write-box" @input="$emit('input', $event.target.value)">
+              <textarea class="write-box" @input="$emit('write', $event.target.value)">
                 
               </textarea>
             </div>
