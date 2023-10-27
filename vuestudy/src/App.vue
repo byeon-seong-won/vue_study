@@ -15,7 +15,7 @@
   <button @click="step=1">버튼1</button>
   <button @click="step=2">버튼2</button>
 
-  <Container :post="게시물" :step="step" :img="img" @input="inputCont = $event;"/>
+  <Container :post="게시물" :step="step" :img="img" @write="inputCont = $event;"/>
   <button @click="more()">더보기</button>
 
   
@@ -27,7 +27,7 @@
   </div>
 
 
-  <div style="margin-top: 500px;"></div>
+  
 
 
 </template>
