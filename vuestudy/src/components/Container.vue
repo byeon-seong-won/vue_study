@@ -8,17 +8,20 @@
         
         <!-- tab02 -->
         <div v-if="step == 1">
-            <div class="upload-image" :style="{ backgroundImage : `url(${img})`}"></div>
+            <div class="upload-image" :style="{ backgroundImage : `url(${img})`}" :class="filter"></div>
             <div class="filters">
                 <filterBox :img="img" :filter="filters[i]" v-for="(filter,i) in filters" :key="i">
-                  {{ filter }}  
+                  <template v-slot:default="이름받음">
+                    <span>{{이름받음.msg}}</span>
+                  </template>
+                  <!-- <template v-slot:b><span>데이터2</span></template> -->
                 </filterBox>
             </div>
         </div>
 
         <!-- tab03 -->
         <div v-if="step == 2">
-            <div class="upload-image" :style="{ backgroundImage : `url(${img})`}"></div>
+            <div class="upload-image" :style="{ backgroundImage : `url(${img})`}" :class="filter"></div>
             <div class="write">
               <textarea class="write-box" @input="$emit('write', $event.target.value)">
                 
@@ -38,7 +41,8 @@
       return {
         filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
         "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
-        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"]
+        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+        filter : ''
       }
     },
     components : {
@@ -49,6 +53,11 @@
       post :  Array,
       step : Number,
       img : String,
+    },
+    mounted() {
+      this.emitter.on('click', (a)=> {
+        this.filter = a
+      })
     }
   }
   </script>
