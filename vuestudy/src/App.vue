@@ -1,31 +1,16 @@
-
 <template>
-  <div class="header">
-    <ul class="header-button-left">
-      <li>Cancel</li>
-    </ul>
-    <ul class="header-button-right">
-      <li>Next</li>
-    </ul>
-    <button v-if="step==2" @click="publish()">발행하기</button>
-    <img src="./assets/logo.png" class="logo" />
+  <div>
+    <h4>XX 원룸</h4>
+    <p>XX 만원</p>
   </div>
-
-  <button @click="step=0">버튼0</button>
-  <button @click="step=1">버튼1</button>
-  <button @click="step=2">버튼2</button>
-
-  <Container :post="게시물" :step="step" :img="img" @write="inputCont = $event;"/>
-  <button @click="more()">더보기</button>
-
-  
+  <div>
+    <h4>XX 원룸</h4>
+    <p>XX 만원</p>
+</div>
 
 
 
-  
 
-
-</template>
 
 
 <script>
