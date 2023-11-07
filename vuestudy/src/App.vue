@@ -2,6 +2,7 @@
 
 
 <template>
+  <button @click="priceSort">가격순 정렬</button>
   <Modal :해당원룸="원룸들[모달누른거]" v-if="isModalopen == true" @modalClose="isModalopen=false"></Modal>
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{menu}}</a>
@@ -32,7 +33,11 @@ export default {
     }
   },
   methods : {
-    
+    priceSort() {
+      this.원룸들.sort(function(a,b) {
+        return a.price - b.price;
+      })
+    }
   },
   components : {
     Modal,
