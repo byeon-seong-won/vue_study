@@ -1,24 +1,12 @@
+
+
+
 <template>
-  <div class="black-bg" v-if="isModalopen == true" :modalIdx="modalIdx">
-    <div class="white-bg">
-      <h4>{{원룸들[modalIdx].title}}</h4>
-      <p>{{원룸들[modalIdx].content}}만원</p>
-      <p>{{원룸들[modalIdx].price}}만원</p>
-      <img :src="원룸들[modalIdx].image" alt="img">
-      <button @click="isModalopen=false">닫기</button>
-    </div>
-  </div>
+  <Modal :해당원룸="원룸들[모달누른거]" v-if="isModalopen == true" @modalClose="isModalopen=false"></Modal>
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{menu}}</a>
   </div>
-  <div v-for="(a,i) in 원룸들" :key="i">
-    <h4 @click="isModalopen=true; modalIdx=i">{{원룸들[i].title}}</h4>
-    <p>{{원룸들[i].content}}만원</p>
-    <p>{{원룸들[i].price}}만원</p>
-    <img :src="원룸들[i].image" alt="img">
-    <button @click="신고수[i]++">허위매물신고</button>
-    <span>신고수 : {{신고수[i]}}</span>
-  </div>
+  <Card v-for="(a,i) in 원룸들" :key="i" :해당원룸="원룸들[i]" :신고수="신고수[i]" @modalClick="isModalopen=true; 모달누른거=$event"></Card>
 </template>
 
 
@@ -26,6 +14,9 @@
 
 <script>
 import data from './data'
+// import Discount from './components/Discount.vue'
+import Card from './components/Card.vue'
+import Modal from './components/Modal.vue'
 export default {
   name : 'App',
   data(){
@@ -42,6 +33,10 @@ export default {
   },
   methods : {
     
+  },
+  components : {
+    Modal,
+    Card
   }
 }
 
