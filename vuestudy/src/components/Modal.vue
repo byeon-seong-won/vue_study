@@ -4,7 +4,7 @@
           <h4>{{ post.title }}</h4>
           <p>{{ post.content }}</p>
           <p>{{ post.price }} 원</p>
-          <button @click="$emit('modalClose')">닫기</button>
+          <button>닫기</button>
         </div>
     </div>
 </template>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name : 'App',
+  name : 'Modal',
   props : {
     post : Object
     
