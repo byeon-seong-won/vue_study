@@ -1,11 +1,17 @@
+
+
+
+
 <template>
     <div class="black-bg">
-        <div class="white-bg">
-          <h4>{{ post.title }}</h4>
-          <p>{{ post.content }}</p>
-          <p>{{ post.price }} 원</p>
-          <button>닫기</button>
-        </div>
+      <div class="white-bg">
+        <h4>{{해당원룸.title}}</h4>
+        <p>{{해당원룸.content}}만원</p>
+        <p>{{해당원룸.price}}만원</p>
+        <img :src="해당원룸.image" alt="img">
+        <button @click="$emit('modalClose')">닫기</button>
+        <input type="text" placeholder="내용을 입력하세요">
+      </div>
     </div>
 </template>
 
@@ -15,8 +21,7 @@
 export default {
   name : 'Modal',
   props : {
-    post : Object
-    
+    해당원룸 : Object,
   }
 }
 
