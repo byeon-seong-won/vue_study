@@ -3,17 +3,13 @@
 
 
 <template>
-    <div class="black-bg">
-      <div class="white-bg">
-        <h4>{{해당원룸.title}}</h4>
-        <p>{{해당원룸.content}}만원</p>
-        <p>{{해당원룸.price}}만원</p>
-        <img :src="해당원룸.image" alt="img">
-        <button @click="$emit('modalClose')">닫기</button>
-        <input v-model="month">
-        <button @click="priceCount()">입력하기</button>
-        <p>최종가격 : {{ totalPrice }}</p>
-      </div>
+    <div>
+      <!-- {{$route.params.id}} -->
+      <h4>상세페이지</h4>
+      <h5>{{posts[$route.params.id].title}}</h5>
+      <p>{{posts[$route.params.id].content}}</p>
+      <router-view></router-view>
+      <!-- router.js에 detail의 Children을 보여줌 -->
     </div>
 </template>
 
@@ -23,7 +19,7 @@
 export default {
   name : 'Detail',
   props : {
-    
+    posts : Array
   },
   data() {
     return {
@@ -31,7 +27,7 @@ export default {
     }
   },
   methods : {
-    p
+    
   },
   
 }
