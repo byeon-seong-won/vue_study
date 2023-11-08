@@ -2,52 +2,53 @@
 
 
 <template>
-  <button @click="priceSort">가격순 정렬</button>
-  <button @click="priceBack">되돌리기</button>
-  <Modal :해당원룸="원룸들[모달누른거]" v-if="isModalopen == true" @modalClose="isModalopen=false"></Modal>
-  <div class="menu">
-    <a v-for="menu in menus" :key="menu">{{menu}}</a>
-  </div>
-  <Card v-for="(a,i) in 원룸들" :key="i" :해당원룸="원룸들[i]" :신고수="신고수[i]" @modalClick="isModalopen=true; 모달누른거=$event"></Card>
+
+    <div>
+      <router-view :posts="posts"></router-view>
+      <!-- /list 로 접속시 이게 <List>가 됨  -->
+    </div>
+    
+
 </template>
 
 
 
 
 <script>
-import data from './data'
-// import Discount from './components/Discount.vue'
-import Card from './components/Card.vue'
-import Modal from './components/Modal.vue'
+
+// import List from './components/List.vue'
+
 export default {
   name : 'App',
   data(){
     return {
-      price1 : 60,
-      스타일 : 'color : red',
-      products : ['역삼동원룸', '천호동원룸','마포구원룸'],
-      menus : ['home','products','about'],
-      신고수 : [0,0,0],
-      isModalopen : false,
-      원룸들 : data,
-      modalIdx : ''
+      posts : [
+          { 
+            title : '첫 째 프로젝트 : 허위매물 전문 부동산 앱',
+            content : 'Vue를 이용하면 비누같이 매끈한 앱을 만들 수 있습니다',
+            date : 'September 24, 2021',
+            number : 0
+          },
+          { 
+            title : '둘 째 프로젝트 : 오마카세 배달 앱',
+            content : '음식이 아니라 셰프를 직접 배달해드립니다',
+            date : 'October 20, 2020',
+            number : 1
+          },
+          { 
+            title : '셋 째 프로젝트 : 현피 앱',
+            content : '거리를 설정하면 가장 가까운 파이터를 소개해드려요! 서로 싸워보세요',
+            date : 'April 24, 2019',
+            number : 2
+          }
+      ]
     }
   },
   methods : {
-    priceSort() {
-      this.원룸들.sort(function(a,b) {
-        return a.price - b.price;
-      })
-    },
-    priceBack() {
-      this.원룸들.sort(function(a,b) {
-        return a.price - b.price;
-      })
-    }
+    
   },
   components : {
-    Modal,
-    Card
+    // List
   }
 }
 
@@ -57,30 +58,8 @@ export default {
 
 <style>
 * {font-family: 'Noto sans KR', sans-serif; letter-spacing: -0.03rem;font-size: 20px;}
-body {margin : 0;}
+body {margin : 0;text-align: center;}
 div {box-sizing: border-box;}
-.menu {
-  background : beige;
-  padding : 15px;
-  border-radius : 5px;
-}
-.menu a {
-  color : #333;
-  padding : 10px;
-  font-weight: bold;
-  border: 1px solid #333;
-  text-transform: uppercase;
-}
-img {width: 50%;}
-.black-bg {
-  width: 100%; height:100%;
-  background: rgba(0,0,0,0.5);
-  position: fixed; padding: 20px;
-}
-.white-bg {
-  width: 100%; background: white;
-  border-radius: 8px;
-  padding: 20px;
-} 
+.container h5 {font-size: 20px;color: #333;}
 
 </style>
