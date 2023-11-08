@@ -10,7 +10,10 @@ import Comment from './components/Comment.vue'
 const routes = [
   {
     path: "/list",
-    component: List,
+    component: {
+        List : List,
+        Comment : Comment,
+    }
   },
   {
     path: "/",
