@@ -4,15 +4,19 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li @click="step--" v-if="step !== 0">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++" v-if="step !== 2">Next</li>
+      <li @click="publish" v-if="step == 2">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
+  <!-- <button @click="newPost">새로운 게시글</button> -->
 
-  <Container :posts="posts" />
+  <input @change="upload" multiple type="file" id="file" />
+
+  <Container :posts="posts" :step="step" :uploadImg="uploadImg" @write="input = $event"/>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -20,7 +24,6 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
-
 </template>
 
 
@@ -29,6 +32,7 @@
 <script>
 
 // import List from './components/List.vue'
+// import axios from 'axios'
 import Container from './components/Container.vue'
 
 
@@ -67,14 +71,47 @@ export default {
           content: "우리집 개는 화장실 물도 내림",
           filter: "lofi"
         }
-      ]
+      ],
+      isTab : 0,
+      step : 0,
+      uploadImg : '',
+      input : ''
     }
   },
   components : {
     Container
   },  
   methods : {
-    
+    // newPost() {
+    //   axios.get('https://codingapple1.github.io/vue/more0.json').then( 결과 => {
+        
+    //   }).catch( ()=> {
+    //     alert('다시 클릭!')
+    //   })
+    // }
+    tabClick(idx) {
+      this.isTab = idx
+    },
+    upload(e){
+    let 파일 = e.target.files;
+    let url = URL.createObjectURL(파일[0]);
+    this.step++;
+    this.uploadImg = url;
+    },
+    publish() {
+      var 새게시물 = {
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=1",
+        postImage: this.uploadImg,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.input,
+        filter: "perpetua"
+      };
+      this.posts.unshift(새게시물);
+      this.step = 0;
+    },
   }
 }
 
