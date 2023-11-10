@@ -10,11 +10,7 @@
     <div v-if="step == 1">
         <div class="upload-image" :style="`background-image:url(${uploadImg})`"></div>
         <div class="filters">
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
+            <Filterbox :uploadImg="uploadImg" :filter="filter" v-for="filter in filters" :key="filter"></Filterbox>
         </div>
     </div>
 
@@ -36,15 +32,21 @@
    
 <script>
   import Post from './Post.vue'
+  import Filterbox from './Filterbox.vue'
   export default {
     name : 'App',
     data() {
         return {
-            
+            filters : [ 
+                "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+                "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+                "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"
+            ]
         } 
     },
     components : {
-      Post
+      Post,
+      Filterbox
     },
     props : {
         posts : Array,
@@ -70,6 +72,7 @@ background-size : cover;
 .filters{
 overflow-x:scroll;
 white-space: nowrap;
+border: 1px solid red;
 }
 .filter-1 {
 width: 100px;
