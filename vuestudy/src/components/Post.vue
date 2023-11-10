@@ -3,13 +3,16 @@
     <div class="post">
         <div class="post-header">
           <div class="profile"></div>
-          <span class="profile-name">{{posts[0].name}}</span>
+          <span class="profile-name">{{post.name}}</span>
         </div>
         <div class="post-body"></div>
         <div class="post-content">
-            <p>43 Likes</p>
-            <p><strong>글쓴이아이디</strong> 임시내용</p>
-            <p class="date">May 15</p>
+            <p>{{post.likes}} Likes</p>
+            <p>
+                <strong>{{post.name}}</strong>
+                {{post.content}}
+            </p>
+            <p class="date">{{post.date}}</p>
         </div>
     </div> 
 </template>
@@ -18,7 +21,8 @@
   export default {
     name : 'post',
     props : {
-        posts : Array
+        post : Object,
+        idx : Number
     }
   }
 
