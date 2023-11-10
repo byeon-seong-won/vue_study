@@ -2,14 +2,17 @@
 
 
 <template>
-    <div class="filter-item"></div> 
+    <div :class="filter + ' filter-item'" :style="`background-image:url(${uploadImg})`">
+        <slot></slot>
+    </div> 
 </template>
 
 <script>
   export default {
-    name : 'post',
+    name : 'Filterbox',
     props : {
-        
+        uploadImg : String,
+        filter : String
     }
   }
 
@@ -23,7 +26,7 @@
   margin: 10px 10px 10px auto;
   padding: 8px;
   display: inline-block;
-  color : white;
+  color : red;
   background-size: cover;
   background-position : center;
 }
