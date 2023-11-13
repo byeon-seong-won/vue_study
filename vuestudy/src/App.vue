@@ -15,6 +15,7 @@
   <!-- <button @click="newPost">새로운 게시글</button> -->
 
   <input @change="upload" multiple type="file" id="file" />
+  <h4>안녕 {{ $store.state.name}} </h4>
 
   <Container :posts="posts" :step="step" :uploadImg="uploadImg" @write="input = $event"/>
 
