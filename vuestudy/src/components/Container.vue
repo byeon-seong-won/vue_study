@@ -8,18 +8,17 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step == 1">
-        <div class="upload-image" :style="`background-image:url(${uploadImg})`"></div>
+        <div :class="checkFilter + ' upload-image'" :style="`background-image:url(${uploadImg})`"></div>
         <div class="filters">
             <Filterbox :uploadImg="uploadImg" :filter="filter" v-for="filter in filters" :key="filter">
                 {{filter}}
             </Filterbox>
-
         </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
-        <div class="upload-image" :style="`background-image:url(${uploadImg})`"></div>
+        <div :class="checkFilter + ' upload-image'" :style="`background-image:url(${uploadImg})`"></div>
         <div class="write">
             <textarea class="write-box" @input="$emit('write', $event.target.value)">write!</textarea>
         </div>
@@ -44,20 +43,23 @@
                 "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
                 "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
                 "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"
-            ]
+            ],
+            checkFilter : ''
         } 
     },
     components : {
-      Post,
-      Filterbox
+        Post,
+        Filterbox
     },
     props : {
         posts : Array,
         step : Number,
         uploadImg : String
     },
-    methods : {
-        
+    mounted() {
+        this.emitter.on('filterChange', (a) => {
+            this.checkFilter = a
+        })
     }
   }
 
