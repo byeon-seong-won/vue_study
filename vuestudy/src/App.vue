@@ -75,7 +75,8 @@ export default {
       isTab : 0,
       step : 0,
       uploadImg : '',
-      input : ''
+      input : '',
+      checkFilter : ''
     }
   },
   components : {
@@ -107,12 +108,17 @@ export default {
         date: "May 15",
         liked: false,
         content: this.input,
-        filter: "perpetua"
+        filter: this.checkFilter
       };
       this.posts.unshift(새게시물);
       this.step = 0;
     },
-  }
+  },
+    mounted() {
+        this.emitter.on('filterChange', (a) => {
+            this.checkFilter = a
+        })
+    }
 }
 
 </script>
