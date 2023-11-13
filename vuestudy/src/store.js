@@ -9,16 +9,16 @@ const store = createStore({
       age : 20,
       like : [1,2,3],
       likeClick : false,
-      post : post
+      post : post 
     }
   },
   mutations : {
-    likeToggle(state) {
+    likeToggle(state,idx) {
       if(state.likeClick == false) {
-        state.like[0]++;
+        state.like[idx]++;
         state.likeClick = true
       } else if(state.likeClick == true) {
-        state.like[0]--;
+        state.like[idx]--;
         state.likeClick = false
       }
     }
