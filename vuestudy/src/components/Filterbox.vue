@@ -2,7 +2,7 @@
 
 
 <template>
-    <div :class="filter + ' filter-item'" :style="`background-image:url(${uploadImg})`">
+    <div :class="filter + ' filter-item'" :style="`background-image:url(${uploadImg})`" @click="fire">
         <slot></slot>
     </div> 
 </template>
@@ -13,6 +13,11 @@
     props : {
         uploadImg : String,
         filter : String
+    },
+    methods : {
+      fire() {
+        this.emitter.emit('filterChange',this.filter)
+      }
     }
   }
 
@@ -29,6 +34,7 @@
   color : red;
   background-size: cover;
   background-position : center;
+  cursor: pointer;
 }
 </style>
   
