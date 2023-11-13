@@ -9,4 +9,4 @@ import store from './store.js'
 let app = createApp(App);
 let emitter = mitt();
 app.config.globalProperties.emitter = emitter;
-app.use(store).mount('#app') 
+app.use(store).use(router).mount('#app') 
