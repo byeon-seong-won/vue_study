@@ -8,7 +8,7 @@
         <div :class="post.filter + ' post-body'" :style="`background-image:url(${post.postImage})`"></div>
         <div class="post-content">
             <button @click="$store.commit('likeToggle', idx)">좋아요</button>
-            <p>{{$store.state.post[idx]}} Likes</p>
+            <p>{{$store.state.likes[idx]}} Likes</p>
             <p>
                 <strong>{{post.name}}</strong>
                 {{post.content}}
